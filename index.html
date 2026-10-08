@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thư viện Truyện - Quản lý & Tra cứu</title>
-    <!-- Google Fonts & Font Awesome Icons -->
+    <title>Bảng Điều Khiển Quản Lý Truyện</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -15,12 +14,10 @@
             --text-primary: #2d3748;
             --text-secondary: #718096;
             --primary: #e53e3e;
-            --primary-light: #feb2b2;
+            --primary-hover: #c53030;
             --primary-soft: #fff5f5;
             --border-color: #fed7d7;
             --card-shadow: 0 4px 15px rgba(229, 62, 62, 0.08);
-            --badge-bg: #fff5f5;
-            --badge-text: #c53030;
         }
 
         [data-theme="dark"] {
@@ -29,12 +26,10 @@
             --text-primary: #f7fafc;
             --text-secondary: #a0aec0;
             --primary: #fc8181;
-            --primary-light: #9b2c2c;
+            --primary-hover: #f56565;
             --primary-soft: #2c1214;
             --border-color: #4a5568;
             --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-            --badge-bg: #4a1d24;
-            --badge-text: #feb2b2;
         }
 
         * {
@@ -42,16 +37,15 @@
             margin: 0;
             padding: 0;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         body {
             background-color: var(--bg-primary);
             color: var(--text-primary);
-            padding-bottom: 50px;
+            padding-bottom: 60px;
         }
 
-        /* Header Bar */
         header {
             background-color: var(--bg-card);
             border-bottom: 1px solid var(--border-color);
@@ -59,240 +53,179 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: var(--card-shadow);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: var(--card-shadow);
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
             font-size: 1.3rem;
             font-weight: 700;
             color: var(--primary);
-        }
-
-        .theme-toggle {
-            background: var(--primary-soft);
-            border: 1px solid var(--border-color);
-            color: var(--primary);
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 8px;
-        }
-
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Thống kê nhanh */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .stat-card {
-            background: var(--bg-card);
-            padding: 18px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--card-shadow);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .stat-icon {
-            width: 45px;
-            height: 45px;
-            border-radius: 10px;
-            background: var(--primary-soft);
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-
-        .stat-val {
-            font-size: 1.4rem;
-            font-weight: 700;
-        }
-
-        .stat-lbl {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-
-        /* Controls / Search Box */
-        .controls {
-            background: var(--bg-card);
-            padding: 20px;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            margin-bottom: 30px;
-            box-shadow: var(--card-shadow);
-        }
-
-        .search-box {
-            position: relative;
-            margin-bottom: 15px;
-        }
-
-        .search-box i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-secondary);
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 12px 15px 12px 45px;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            font-size: 1rem;
-            outline: none;
-        }
-
-        .search-input:focus {
-            border-color: var(--primary);
-        }
-
-        .filters {
-            display: flex;
-            flex-wrap: wrap;
             gap: 10px;
         }
 
-        .filter-btn {
-            background: var(--bg-primary);
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-weight: 500;
+        .header-actions {
+            display: flex;
+            gap: 12px;
         }
 
-        .filter-btn.active {
+        .btn {
+            padding: 9px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
             background: var(--primary);
             color: white;
-            border-color: var(--primary);
+            border: none;
         }
 
-        /* Novel Grid & Cards */
-        .novel-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 20px;
+        .btn-primary:hover {
+            background: var(--primary-hover);
         }
 
-        .novel-card {
+        .btn-soft {
+            background: var(--primary-soft);
+            color: var(--primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 25px auto;
+            padding: 0 20px;
+        }
+
+        /* Modal / Form nhập dữ liệu */
+        .card-box {
             background: var(--bg-card);
             border-radius: 16px;
             border: 1px solid var(--border-color);
-            padding: 20px;
+            padding: 24px;
+            margin-bottom: 25px;
             box-shadow: var(--card-shadow);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
         }
 
-        .card-header {
-            margin-bottom: 12px;
-        }
-
-        .novel-title {
-            font-size: 1.15rem;
+        .card-title {
+            font-size: 1.1rem;
             font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 6px;
-            line-height: 1.4;
+            color: var(--primary);
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .novel-meta {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .form-group {
             display: flex;
             flex-direction: column;
-            gap: 4px;
-        }
-
-        .badges {
-            display: flex;
-            flex-wrap: wrap;
             gap: 6px;
-            margin: 12px 0;
         }
 
-        .badge {
-            background: var(--badge-bg);
-            color: var(--badge-text);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.75rem;
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 0.85rem;
             font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        input, textarea {
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            outline: none;
+            font-size: 0.95rem;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--primary);
+        }
+
+        /* Bảng Danh sách */
+        .table-responsive {
+            overflow-x: auto;
+            border-radius: 12px;
             border: 1px solid var(--border-color);
         }
 
-        .novel-summary {
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            text-align: left;
             font-size: 0.88rem;
-            color: var(--text-secondary);
-            line-height: 1.5;
-            background: var(--bg-primary);
-            padding: 10px 12px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            max-height: 100px;
-            overflow-y: auto;
         }
 
-        .action-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            border-top: 1px solid var(--border-color);
-            padding-top: 12px;
-        }
-
-        .btn-link {
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 0.78rem;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
+        th {
             background: var(--primary-soft);
             color: var(--primary);
-            border: 1px solid var(--border-color);
+            padding: 12px 14px;
+            font-weight: 700;
+            white-space: nowrap;
+            border-bottom: 2px solid var(--border-color);
         }
 
-        .btn-link:hover {
-            background: var(--primary);
-            color: white;
+        td {
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
-        .btn-link.main {
+        .action-btns {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-icon {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-icon:hover {
+            color: var(--primary);
+        }
+
+        /* Toast thông báo */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
             background: var(--primary);
             color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: none;
+            z-index: 1000;
         }
     </style>
 </head>
@@ -300,184 +233,243 @@
 
     <header>
         <div class="logo">
-            <i class="fa-solid fa-book-bookmark"></i> Thư Viện Đam Mỹ
+            <i class="fa-solid fa-book-medical"></i> Quản Lý Dữ Liệu Truyện
         </div>
-        <button class="theme-toggle" onclick="toggleTheme()">
-            <i class="fa-solid fa-moon" id="theme-icon"></i> <span id="theme-text">Chế độ tối</span>
-        </button>
+        <div class="header-actions">
+            <button class="btn btn-primary" onclick="copyHTMLTable()">
+                <i class="fa-solid fa-code"></i> Copy Mã HTML
+            </button>
+            <button class="btn btn-soft" onclick="toggleTheme()">
+                <i class="fa-solid fa-moon" id="theme-icon"></i> Chế độ tối
+            </button>
+        </div>
     </header>
 
     <div class="container">
 
-        <!-- Thống kê -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-icon"><i class="fa-solid fa-books"></i></div>
-                <div>
-                    <div class="stat-val" id="total-count">0</div>
-                    <div class="stat-lbl">Tổng số truyện</div>
-                </div>
+        <!-- Form Nhập Truyện Mới -->
+        <div class="card-box">
+            <div class="card-title">
+                <i class="fa-solid fa-plus-circle"></i> Nhập Thông Tin Truyện Mới
             </div>
-            <div class="stat-card">
-                <div class="stat-icon"><i class="fa-solid fa-circle-check"></i></div>
-                <div>
-                    <div class="stat-val" id="completed-count">0</div>
-                    <div class="stat-lbl">Đã hoàn thành</div>
+            <form id="novelForm" onsubmit="saveNovel(event)">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Tên truyện *</label>
+                        <input type="text" id="title" required placeholder="Nhập tên truyện...">
+                    </div>
+                    <div class="form-group">
+                        <label>Tác giả</label>
+                        <input type="text" id="author" placeholder="Tên tác giả...">
+                    </div>
+                    <div class="form-group">
+                        <label>Thể loại</label>
+                        <input type="text" id="genre" placeholder="Ví dụ: Nguyên sang, Đam mỹ...">
+                    </div>
+                    <div class="form-group">
+                        <label>Số chương</label>
+                        <input type="text" id="chapters" placeholder="Ví dụ: 100 chương...">
+                    </div>
+                    <div class="form-group">
+                        <label>Link wiki</label>
+                        <input type="url" id="linkWiki" placeholder="https://wikicv.org/...">
+                    </div>
+                    <div class="form-group">
+                        <label>Link raw</label>
+                        <input type="url" id="linkRaw" placeholder="https://xbanxia.cc/...">
+                    </div>
+                    <div class="form-group">
+                        <label>Link dammy</label>
+                        <input type="url" id="linkDammy" placeholder="https://dammy.cc/...">
+                    </div>
+                    <div class="form-group">
+                        <label>Link motruyen</label>
+                        <input type="url" id="linkMotruyen" placeholder="https://motruyen.com/...">
+                    </div>
+                    <div class="form-group">
+                        <label>Link ảnh gg drive</label>
+                        <input type="url" id="linkDriveImg" placeholder="https://drive.google.com/file/d/...">
+                    </div>
+                    <div class="form-group">
+                        <label>Link txt gg drive</label>
+                        <input type="url" id="linkDriveTxt" placeholder="https://drive.google.com/file/d/...">
+                    </div>
+                    <div class="form-group full">
+                        <label>Giới thiệu / Tóm tắt</label>
+                        <textarea id="summary" rows="3" placeholder="Nội dung tóm tắt..."></textarea>
+                    </div>
                 </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon"><i class="fa-solid fa-clapperboard"></i></div>
-                <div>
-                    <div class="stat-val" id="ai-count">0</div>
-                    <div class="stat-lbl">Có Phim AI</div>
+                <div style="margin-top: 18px; display: flex; justify-content: flex-end;">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-floppy-disk"></i> Lưu Truyện Vô Bảng
+                    </button>
                 </div>
-            </div>
+            </form>
         </div>
 
-        <!-- Bộ lọc & Tìm kiếm -->
-        <div class="controls">
-            <div class="search-box">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="searchInput" class="search-input" placeholder="Tìm theo tên truyện, tác giả, nhân vật chính (công x thụ)..." oninput="renderNovels()">
+        <!-- Bảng Danh Sách Đã Nhập -->
+        <div class="card-box">
+            <div class="card-title" style="justify-content: space-between;">
+                <span><i class="fa-solid fa-list-check"></i> Danh Sách Truyện (<span id="count">0</span>)</span>
+                <input type="text" id="searchBar" placeholder="Lọc nhanh..." oninput="renderTable()" style="font-weight: normal; width: 200px;">
             </div>
-            <div class="filters">
-                <button class="filter-btn active" onclick="setFilter('all', this)">Tất cả</button>
-                <button class="filter-btn" onclick="setFilter('dai', this)">Truyện dài</button>
-                <button class="filter-btn" onclick="setFilter('ngan', this)">Truyện ngắn</button>
-                <button class="filter-btn" onclick="setFilter('hoan', this)">Đã hoàn thành</button>
-                <button class="filter-btn" onclick="setFilter('ai', this)">Có phim AI</button>
-            </div>
-        </div>
 
-        <!-- Danh sách truyện -->
-        <div class="novel-grid" id="novelGrid">
-            <!-- Render từ JS -->
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tên truyện</th>
+                            <th>Tác giả</th>
+                            <th>Thể loại</th>
+                            <th>Số chương</th>
+                            <th>Giới thiệu</th>
+                            <th>Link wiki</th>
+                            <th>Link raw</th>
+                            <th>Link dammy</th>
+                            <th>Link motruyen</th>
+                            <th>Link ảnh Drive</th>
+                            <th>Link txt Drive</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Render từ JS -->
+                    </tbody>
+                </table>
+            </div>
         </div>
 
     </div>
 
-    <script>
-        // Mẫu Dữ liệu Truyện đại diện (Có thể tự động load từ CSV của Google Sheet)
-        const novels = [
-            {
-                title: "ABO: Xà Tướng Quân Bị Đùa Giỡn",
-                author: "Đang cập nhật",
-                char: "Vụ Lam x Dịch Thiên",
-                chapters: "101 chương",
-                type: "Truyện dài",
-                status: "Đã hoàn thành",
-                summary: "Dịch Thiên nhặt được một con rắn cưng bằng máy. Con rắn này tính tình lạnh lùng ngạo kiều, nhưng trong mắt cậu lại vô cùng đáng yêu...",
-                dammy: "https://dammy.cc/abo-xa-tuong-quan-bi-dua-gion.html",
-                driveImg: "https://drive.google.com",
-                hasAI: "Không",
-                translated: "Rồi",
-                posted: "Rồi"
-            },
-            {
-                title: "Ảnh Đế Quyền Thần",
-                author: "Hắc Thủy",
-                char: "Ô Huyền Giác x Mặc Trích Thanh",
-                chapters: "154 chương",
-                type: "Truyện dài",
-                status: "Đã hoàn thành",
-                summary: "Ảnh đế Mặc vừa mới đóng máy, liền xuyên vào bộ phim truyền hình do chính mình diễn, trở thành tên quyền tướng điên phê giết người như ngóe...",
-                dammy: "https://dammy.cc/anh-de-quyen-than.html",
-                driveImg: "https://drive.google.com",
-                hasAI: "Có",
-                translated: "Rồi",
-                posted: "Rồi"
-            },
-            {
-                title: "Bị Cả Tộc Ruồng Bỏ, Giao Nhân Lại Thành Ngoại Lệ Duy Nhất Của Bệ Hạ!",
-                author: "Zhihu",
-                char: "",
-                chapters: "15 chương",
-                type: "Truyện ngắn",
-                status: "Đã đủ bộ",
-                summary: "Ta là giao nhân phế vật vô dụng nhất trong tộc. Gia tộc coi ta như rác rưởi, nhét vào đội ngũ hiến tế cho bạo quân...",
-                dammy: "https://dammy.cc/bi-ca-toc-ruong-bo-giao-nhan-lai-thanh-ngoai-le-duy-nhat-cua-be-ha.html",
-                driveImg: "https://drive.google.com",
-                hasAI: "Không",
-                translated: "Rồi",
-                posted: "Rồi"
-            }
-        ];
+    <div class="toast" id="toastNotification">Đã copy mã HTML thành công!</div>
 
-        let currentFilter = 'all';
+    <script>
+        // Lấy dữ liệu lưu trữ từ trình duyệt
+        let novelList = JSON.parse(localStorage.getItem('my_novels_db')) || [];
+
+        function saveNovel(e) {
+            e.preventDefault();
+            const newNovel = {
+                id: Date.now(),
+                title: document.getElementById('title').value.trim(),
+                author: document.getElementById('author').value.trim(),
+                genre: document.getElementById('genre').value.trim(),
+                chapters: document.getElementById('chapters').value.trim(),
+                summary: document.getElementById('summary').value.trim(),
+                linkWiki: document.getElementById('linkWiki').value.trim(),
+                linkRaw: document.getElementById('linkRaw').value.trim(),
+                linkDammy: document.getElementById('linkDammy').value.trim(),
+                linkMotruyen: document.getElementById('linkMotruyen').value.trim(),
+                linkDriveImg: document.getElementById('linkDriveImg').value.trim(),
+                linkDriveTxt: document.getElementById('linkDriveTxt').value.trim()
+            };
+
+            novelList.unshift(newNovel);
+            localStorage.setItem('my_novels_db', JSON.stringify(novelList));
+            document.getElementById('novelForm').reset();
+            renderTable();
+            showToast("Đã lưu truyện thành công!");
+        }
+
+        function deleteNovel(id) {
+            if(confirm("Bạn có chắc chắn muốn xóa truyện này?")) {
+                novelList = novelList.filter(item => item.id !== id);
+                localStorage.setItem('my_novels_db', JSON.stringify(novelList));
+                renderTable();
+                showToast("Đã xóa truyện!");
+            }
+        }
+
+        function renderTable() {
+            const query = document.getElementById('searchBar').value.toLowerCase();
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+
+            const filtered = novelList.filter(n => 
+                n.title.toLowerCase().includes(query) || 
+                n.author.toLowerCase().includes(query)
+            );
+
+            document.getElementById('count').innerText = filtered.length;
+
+            if(filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="12" style="text-align:center; color: var(--text-secondary); padding: 20px;">Chưa có dữ liệu truyện nào</td></tr>`;
+                return;
+            }
+
+            filtered.forEach(n => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><b>${n.title}</b></td>
+                    <td>${n.author || '-'}</td>
+                    <td>${n.genre || '-'}</td>
+                    <td>${n.chapters || '-'}</td>
+                    <td title="${n.summary}">${n.summary || '-'}</td>
+                    <td>${n.linkWiki ? `<a href="${n.linkWiki}" target="_blank">Link Wiki</a>` : '-'}</td>
+                    <td>${n.linkRaw ? `<a href="${n.linkRaw}" target="_blank">Link Raw</a>` : '-'}</td>
+                    <td>${n.linkDammy ? `<a href="${n.linkDammy}" target="_blank">Link Dammy</a>` : '-'}</td>
+                    <td>${n.linkMotruyen ? `<a href="${n.linkMotruyen}" target="_blank">Link Motruyen</a>` : '-'}</td>
+                    <td>${n.linkDriveImg ? `<a href="${n.linkDriveImg}" target="_blank">Ảnh Drive</a>` : '-'}</td>
+                    <td>${n.linkDriveTxt ? `<a href="${n.linkDriveTxt}" target="_blank">Txt Drive</a>` : '-'}</td>
+                    <td>
+                        <button class="btn-icon" onclick="deleteNovel(${n.id})" title="Xóa"><i class="fa-solid fa-trash" style="color: #e53e3e;"></i></button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // TẠO VÀ COPY MÃ HTML THEO ĐÚNG THỨ TỰ YÊU CẦU
+        function copyHTMLTable() {
+            if(novelList.length === 0) {
+                alert("Chưa có dữ liệu truyện để copy!");
+                return;
+            }
+
+            let html = `<table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%;">\n`;
+            html += `  <thead>\n    <tr style="background-color: #f8d7da; color: #842029;">\n`;
+            html += `      <th>Tên truyện</th>\n      <th>Tác giả</th>\n      <th>Thể loại</th>\n      <th>Số chương</th>\n      <th>Giới thiệu</th>\n      <th>Link wiki</th>\n      <th>Link raw</th>\n      <th>Link dammy</th>\n      <th>Link motruyen</th>\n      <th>Link ảnh gg drive</th>\n      <th>Link txt gg drive</th>\n`;
+            html += `    </tr>\n  </thead>\n  <tbody>\n`;
+
+            novelList.forEach(n => {
+                html += `    <tr>\n`;
+                html += `      <td>${n.title}</td>\n`;
+                html += `      <td>${n.author}</td>\n`;
+                html += `      <td>${n.genre}</td>\n`;
+                html += `      <td>${n.chapters}</td>\n`;
+                html += `      <td>${n.summary}</td>\n`;
+                html += `      <td>${n.linkWiki ? `<a href="${n.linkWiki}">Link Wiki</a>` : ''}</td>\n`;
+                html += `      <td>${n.linkRaw ? `<a href="${n.linkRaw}">Link Raw</a>` : ''}</td>\n`;
+                html += `      <td>${n.linkDammy ? `<a href="${n.linkDammy}">Link Dammy</a>` : ''}</td>\n`;
+                html += `      <td>${n.linkMotruyen ? `<a href="${n.linkMotruyen}">Link Motruyen</a>` : ''}</td>\n`;
+                html += `      <td>${n.linkDriveImg ? `<a href="${n.linkDriveImg}">Link ảnh gg drive</a>` : ''}</td>\n`;
+                html += `      <td>${n.linkDriveTxt ? `<a href="${n.linkDriveTxt}">Link txt gg drive</a>` : ''}</td>\n`;
+                html += `    </tr>\n`;
+            });
+
+            html += `  </tbody>\n</table>`;
+
+            navigator.clipboard.writeText(html).then(() => {
+                showToast("Đã copy mã HTML Table theo đúng thứ tự!");
+            });
+        }
 
         function toggleTheme() {
             const body = document.body;
             const isDark = body.getAttribute('data-theme') === 'dark';
             body.setAttribute('data-theme', isDark ? 'light' : 'dark');
             document.getElementById('theme-icon').className = isDark ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
-            document.getElementById('theme-text').innerText = isDark ? 'Chế độ tối' : 'Chế độ sáng';
         }
 
-        function setFilter(filter, btn) {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            currentFilter = filter;
-            renderNovels();
+        function showToast(msg) {
+            const toast = document.getElementById('toastNotification');
+            toast.innerText = msg;
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 2500);
         }
 
-        function renderNovels() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            const grid = document.getElementById('novelGrid');
-            grid.innerHTML = '';
-
-            let filtered = novels.filter(n => {
-                const matchQuery = n.title.toLowerCase().includes(query) || 
-                                   n.author.toLowerCase().includes(query) || 
-                                   n.char.toLowerCase().includes(query);
-                
-                if (!matchQuery) return false;
-
-                if (currentFilter === 'dai') return n.type === 'Truyện dài';
-                if (currentFilter === 'ngan') return n.type === 'Truyện ngắn';
-                if (currentFilter === 'hoan') return n.status.includes('hoàn thành') || n.status.includes('đủ bộ');
-                if (currentFilter === 'ai') return n.hasAI === 'Có';
-                return true;
-            });
-
-            // Cập nhật thống kê
-            document.getElementById('total-count').innerText = novels.length;
-            document.getElementById('completed-count').innerText = novels.filter(n => n.status.includes('hoàn thành') || n.status.includes('đủ bộ')).length;
-            document.getElementById('ai-count').innerText = novels.filter(n => n.hasAI === 'Có').length;
-
-            filtered.forEach(n => {
-                const card = document.createElement('div');
-                card.className = 'novel-card';
-                card.innerHTML = `
-                    <div>
-                        <div class="card-header">
-                            <div class="novel-title">${n.title}</div>
-                            <div class="novel-meta">
-                                <span><i class="fa-solid fa-user-pen"></i> Tác giả: ${n.author || 'Chưa rõ'}</span>
-                                ${n.char ? `<span><i class="fa-solid fa-heart"></i> CP: ${n.char}</span>` : ''}
-                                <span><i class="fa-solid fa-list-ol"></i> Số chương: ${n.chapters}</span>
-                            </div>
-                        </div>
-
-                        <div class="badges">
-                            <span class="badge">${n.type}</span>
-                            <span class="badge">${n.status}</span>
-                            ${n.hasAI === 'Có' ? '<span class="badge" style="background:#ebf8ff; color:#2b6cb0;">Phim AI</span>' : ''}
-                        </div>
-
-                        ${n.summary ? `<div class="novel-summary">${n.summary}</div>` : ''}
-                    </div>
-
-                    <div class="action-links">
-                        ${n.dammy ? `<a href="${n.dammy}" target="_blank" class="btn-link main"><i class="fa-solid fa-book-open"></i> Đọc ngay</a>` : ''}
-                        ${n.driveImg ? `<a href="${n.driveImg}" target="_blank" class="btn-link"><i class="fa-solid fa-image"></i> Bìa Drive</a>` : ''}
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        // Khởi chạy khi tải trang
-        renderNovels();
+        // Khởi tạo
+        renderTable();
     </script>
 </body>
 </html>
