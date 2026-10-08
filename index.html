@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thư viện Truyện - Quản lý & Tra cứu</title>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-primary: #fff5f5;
+            --bg-card: #ffffff;
+            --text-primary: #2d3748;
+            --text-secondary: #718096;
+            --primary: #e53e3e;
+            --primary-light: #feb2b2;
+            --primary-soft: #fff5f5;
+            --border-color: #fed7d7;
+            --card-shadow: 0 4px 15px rgba(229, 62, 62, 0.08);
+            --badge-bg: #fff5f5;
+            --badge-text: #c53030;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a202c;
+            --bg-card: #2d3748;
+            --text-primary: #f7fafc;
+            --text-secondary: #a0aec0;
+            --primary: #fc8181;
+            --primary-light: #9b2c2c;
+            --primary-soft: #2c1214;
+            --border-color: #4a5568;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            --badge-bg: #4a1d24;
+            --badge-text: #feb2b2;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            padding-bottom: 50px;
+        }
+
+        /* Header Bar */
+        header {
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .theme-toggle {
+            background: var(--primary-soft);
+            border: 1px solid var(--border-color);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Thống kê nhanh */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            padding: 18px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--card-shadow);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .stat-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            background: var(--primary-soft);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .stat-val {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .stat-lbl {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Controls / Search Box */
+        .controls {
+            background: var(--bg-card);
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 15px 12px 45px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary);
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Novel Grid & Cards */
+        .novel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .novel-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .card-header {
+            margin-bottom: 12px;
+        }
+
+        .novel-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .novel-meta {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 12px 0;
+        }
+
+        .badge {
+            background: var(--badge-bg);
+            color: var(--badge-text);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+        }
+
+        .novel-summary {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            background: var(--bg-primary);
+            padding: 10px 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            max-height: 100px;
+            overflow-y: auto;
+        }
+
+        .action-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 12px;
+        }
+
+        .btn-link {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: var(--primary-soft);
+            color: var(--primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-link:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-link.main {
+            background: var(--primary);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <i class="fa-solid fa-book-bookmark"></i> Thư Viện Đam Mỹ
+        </div>
+        <button class="theme-toggle" onclick="toggleTheme()">
+            <i class="fa-solid fa-moon" id="theme-icon"></i> <span id="theme-text">Chế độ tối</span>
+        </button>
+    </header>
+
+    <div class="container">
+
+        <!-- Thống kê -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-books"></i></div>
+                <div>
+                    <div class="stat-val" id="total-count">0</div>
+                    <div class="stat-lbl">Tổng số truyện</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-circle-check"></i></div>
+                <div>
+                    <div class="stat-val" id="completed-count">0</div>
+                    <div class="stat-lbl">Đã hoàn thành</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-clapperboard"></i></div>
+                <div>
+                    <div class="stat-val" id="ai-count">0</div>
+                    <div class="stat-lbl">Có Phim AI</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bộ lọc & Tìm kiếm -->
+        <div class="controls">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" class="search-input" placeholder="Tìm theo tên truyện, tác giả, nhân vật chính (công x thụ)..." oninput="renderNovels()">
+            </div>
+            <div class="filters">
+                <button class="filter-btn active" onclick="setFilter('all', this)">Tất cả</button>
+                <button class="filter-btn" onclick="setFilter('dai', this)">Truyện dài</button>
+                <button class="filter-btn" onclick="setFilter('ngan', this)">Truyện ngắn</button>
+                <button class="filter-btn" onclick="setFilter('hoan', this)">Đã hoàn thành</button>
+                <button class="filter-btn" onclick="setFilter('ai', this)">Có phim AI</button>
+            </div>
+        </div>
+
+        <!-- Danh sách truyện -->
+        <div class="novel-grid" id="novelGrid">
+            <!-- Render từ JS -->
+        </div>
+
+    </div>
+
+    <script>
+        // Mẫu Dữ liệu Truyện đại diện (Có thể tự động load từ CSV của Google Sheet)
+        const novels = [
+            {
+                title: "ABO: Xà Tướng Quân Bị Đùa Giỡn",
+                author: "Đang cập nhật",
+                char: "Vụ Lam x Dịch Thiên",
+                chapters: "101 chương",
+                type: "Truyện dài",
+                status: "Đã hoàn thành",
+                summary: "Dịch Thiên nhặt được một con rắn cưng bằng máy. Con rắn này tính tình lạnh lùng ngạo kiều, nhưng trong mắt cậu lại vô cùng đáng yêu...",
+                dammy: "https://dammy.cc/abo-xa-tuong-quan-bi-dua-gion.html",
+                driveImg: "https://drive.google.com",
+                hasAI: "Không",
+                translated: "Rồi",
+                posted: "Rồi"
+            },
+            {
+                title: "Ảnh Đế Quyền Thần",
+                author: "Hắc Thủy",
+                char: "Ô Huyền Giác x Mặc Trích Thanh",
+                chapters: "154 chương",
+                type: "Truyện dài",
+                status: "Đã hoàn thành",
+                summary: "Ảnh đế Mặc vừa mới đóng máy, liền xuyên vào bộ phim truyền hình do chính mình diễn, trở thành tên quyền tướng điên phê giết người như ngóe...",
+                dammy: "https://dammy.cc/anh-de-quyen-than.html",
+                driveImg: "https://drive.google.com",
+                hasAI: "Có",
+                translated: "Rồi",
+                posted: "Rồi"
+            },
+            {
+                title: "Bị Cả Tộc Ruồng Bỏ, Giao Nhân Lại Thành Ngoại Lệ Duy Nhất Của Bệ Hạ!",
+                author: "Zhihu",
+                char: "",
+                chapters: "15 chương",
+                type: "Truyện ngắn",
+                status: "Đã đủ bộ",
+                summary: "Ta là giao nhân phế vật vô dụng nhất trong tộc. Gia tộc coi ta như rác rưởi, nhét vào đội ngũ hiến tế cho bạo quân...",
+                dammy: "https://dammy.cc/bi-ca-toc-ruong-bo-giao-nhan-lai-thanh-ngoai-le-duy-nhat-cua-be-ha.html",
+                driveImg: "https://drive.google.com",
+                hasAI: "Không",
+                translated: "Rồi",
+                posted: "Rồi"
+            }
+        ];
+
+        let currentFilter = 'all';
+
+        function toggleTheme() {
+            const body = document.body;
+            const isDark = body.getAttribute('data-theme') === 'dark';
+            body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            document.getElementById('theme-icon').className = isDark ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+            document.getElementById('theme-text').innerText = isDark ? 'Chế độ tối' : 'Chế độ sáng';
+        }
+
+        function setFilter(filter, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentFilter = filter;
+            renderNovels();
+        }
+
+        function renderNovels() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const grid = document.getElementById('novelGrid');
+            grid.innerHTML = '';
+
+            let filtered = novels.filter(n => {
+                const matchQuery = n.title.toLowerCase().includes(query) || 
+                                   n.author.toLowerCase().includes(query) || 
+                                   n.char.toLowerCase().includes(query);
+                
+                if (!matchQuery) return false;
+
+                if (currentFilter === 'dai') return n.type === 'Truyện dài';
+                if (currentFilter === 'ngan') return n.type === 'Truyện ngắn';
+                if (currentFilter === 'hoan') return n.status.includes('hoàn thành') || n.status.includes('đủ bộ');
+                if (currentFilter === 'ai') return n.hasAI === 'Có';
+                return true;
+            });
+
+            // Cập nhật thống kê
+            document.getElementById('total-count').innerText = novels.length;
+            document.getElementById('completed-count').innerText = novels.filter(n => n.status.includes('hoàn thành') || n.status.includes('đủ bộ')).length;
+            document.getElementById('ai-count').innerText = novels.filter(n => n.hasAI === 'Có').length;
+
+            filtered.forEach(n => {
+                const card = document.createElement('div');
+                card.className = 'novel-card';
+                card.innerHTML = `
+                    <div>
+                        <div class="card-header">
+                            <div class="novel-title">${n.title}</div>
+                            <div class="novel-meta">
+                                <span><i class="fa-solid fa-user-pen"></i> Tác giả: ${n.author || 'Chưa rõ'}</span>
+                                ${n.char ? `<span><i class="fa-solid fa-heart"></i> CP: ${n.char}</span>` : ''}
+                                <span><i class="fa-solid fa-list-ol"></i> Số chương: ${n.chapters}</span>
+                            </div>
+                        </div>
+
+                        <div class="badges">
+                            <span class="badge">${n.type}</span>
+                            <span class="badge">${n.status}</span>
+                            ${n.hasAI === 'Có' ? '<span class="badge" style="background:#ebf8ff; color:#2b6cb0;">Phim AI</span>' : ''}
+                        </div>
+
+                        ${n.summary ? `<div class="novel-summary">${n.summary}</div>` : ''}
+                    </div>
+
+                    <div class="action-links">
+                        ${n.dammy ? `<a href="${n.dammy}" target="_blank" class="btn-link main"><i class="fa-solid fa-book-open"></i> Đọc ngay</a>` : ''}
+                        ${n.driveImg ? `<a href="${n.driveImg}" target="_blank" class="btn-link"><i class="fa-solid fa-image"></i> Bìa Drive</a>` : ''}
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Khởi chạy khi tải trang
+        renderNovels();
+    </script>
+</body>
+</html>
