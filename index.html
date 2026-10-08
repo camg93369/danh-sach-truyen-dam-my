@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bảng Điều Khiển Quản Lý Truyện</title>
+    <title>Quản Lý Dữ Liệu Truyện (Google Sheets Cloud)</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -32,208 +32,36 @@
             --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        body {
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            padding-bottom: 60px;
-        }
-
-        header {
-            background-color: var(--bg-card);
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: var(--card-shadow);
-        }
-
-        .logo {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 12px;
-        }
-
-        .btn {
-            padding: 9px 18px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            border: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-hover);
-        }
-
-        .btn-soft {
-            background: var(--primary-soft);
-            color: var(--primary);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 25px auto;
-            padding: 0 20px;
-        }
-
-        /* Modal / Form nhập dữ liệu */
-        .card-box {
-            background: var(--bg-card);
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            padding: 24px;
-            margin-bottom: 25px;
-            box-shadow: var(--card-shadow);
-        }
-
-        .card-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 18px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .form-group.full {
-            grid-column: 1 / -1;
-        }
-
-        label {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-        }
-
-        input, textarea {
-            padding: 10px 14px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            outline: none;
-            font-size: 0.95rem;
-        }
-
-        input:focus, textarea:focus {
-            border-color: var(--primary);
-        }
-
-        /* Bảng Danh sách */
-        .table-responsive {
-            overflow-x: auto;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: var(--bg-card);
-            text-align: left;
-            font-size: 0.88rem;
-        }
-
-        th {
-            background: var(--primary-soft);
-            color: var(--primary);
-            padding: 12px 14px;
-            font-weight: 700;
-            white-space: nowrap;
-            border-bottom: 2px solid var(--border-color);
-        }
-
-        td {
-            padding: 12px 14px;
-            border-bottom: 1px solid var(--border-color);
-            vertical-align: middle;
-            max-width: 200px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .action-btns {
-            display: flex;
-            gap: 8px;
-        }
-
-        .btn-icon {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .btn-icon:hover {
-            color: var(--primary);
-        }
-
-        /* Toast thông báo */
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--primary);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 600;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            display: none;
-            z-index: 1000;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; transition: background-color 0.3s, color 0.3s; }
+        body { background-color: var(--bg-primary); color: var(--text-primary); padding-bottom: 60px; }
+        header { background-color: var(--bg-card); border-bottom: 1px solid var(--border-color); padding: 1rem 2rem; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--card-shadow); }
+        .logo { font-size: 1.3rem; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 10px; }
+        .header-actions { display: flex; gap: 12px; }
+        .btn { padding: 9px 18px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; cursor: pointer; border: 1px solid var(--border-color); display: flex; align-items: center; gap: 8px; }
+        .btn-primary { background: var(--primary); color: white; border: none; }
+        .btn-primary:hover { background: var(--primary-hover); }
+        .btn-soft { background: var(--primary-soft); color: var(--primary); }
+        .container { max-width: 1200px; margin: 25px auto; padding: 0 20px; }
+        .card-box { background: var(--bg-card); border-radius: 16px; border: 1px solid var(--border-color); padding: 24px; margin-bottom: 25px; box-shadow: var(--card-shadow); }
+        .card-title { font-size: 1.1rem; font-weight: 700; color: var(--primary); margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+        .form-group { display: flex; flex-direction: column; gap: 6px; }
+        .form-group.full { grid-column: 1 / -1; }
+        label { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); }
+        input, textarea { padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-primary); color: var(--text-primary); outline: none; font-size: 0.95rem; }
+        input:focus, textarea:focus { border-color: var(--primary); }
+        .table-responsive { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border-color); }
+        table { width: 100%; border-collapse: collapse; background: var(--bg-card); text-align: left; font-size: 0.88rem; }
+        th { background: var(--primary-soft); color: var(--primary); padding: 12px 14px; font-weight: 700; white-space: nowrap; border-bottom: 2px solid var(--border-color); }
+        td { padding: 12px 14px; border-bottom: 1px solid var(--border-color); vertical-align: middle; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .toast { position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: white; padding: 12px 24px; border-radius: 8px; font-weight: 600; box-shadow: 0 4px 12px rgba(0,0,0,0.15); display: none; z-index: 1000; }
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo">
-            <i class="fa-solid fa-book-medical"></i> Quản Lý Dữ Liệu Truyện
+            <i class="fa-solid fa-file-excel"></i> Quản Lý Dữ Liệu Truyện (Google Sheets API)
         </div>
         <div class="header-actions">
             <button class="btn btn-primary" onclick="copyHTMLTable()">
@@ -300,17 +128,17 @@
                     </div>
                 </div>
                 <div style="margin-top: 18px; display: flex; justify-content: flex-end;">
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fa-solid fa-floppy-disk"></i> Lưu Truyện Vô Bảng
+                    <button type="submit" class="btn btn-primary" id="btnSave">
+                        <i class="fa-solid fa-floppy-disk"></i> Lưu Về Google Sheet
                     </button>
                 </div>
             </form>
         </div>
 
-        <!-- Bảng Danh Sách Đã Nhập -->
+        <!-- Bảng Danh Sách -->
         <div class="card-box">
             <div class="card-title" style="justify-content: space-between;">
-                <span><i class="fa-solid fa-list-check"></i> Danh Sách Truyện (<span id="count">0</span>)</span>
+                <span><i class="fa-solid fa-list-check"></i> Danh Sách Truyện Trong Google Sheet (<span id="count">0</span>)</span>
                 <input type="text" id="searchBar" placeholder="Lọc nhanh..." oninput="renderTable()" style="font-weight: normal; width: 200px;">
             </div>
 
@@ -329,7 +157,6 @@
                             <th>Link motruyen</th>
                             <th>Link ảnh Drive</th>
                             <th>Link txt Drive</th>
-                            <th>Thao tác</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
@@ -341,16 +168,33 @@
 
     </div>
 
-    <div class="toast" id="toastNotification">Đã copy mã HTML thành công!</div>
+    <div class="toast" id="toastNotification">Thông báo</div>
 
     <script>
-        // Lấy dữ liệu lưu trữ từ trình duyệt
-        let novelList = JSON.parse(localStorage.getItem('my_novels_db')) || [];
+        // 🛠️ DÁN URL APPS SCRIPT CỦA BẠN VÀO ĐÂY:
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwk-c7aOLfIMda_D-V0ArQ7vg4u9hEYJlDy43SzEbcG_XyhhGhGbiJt2du-8k-K2P3s/exec";
 
-        function saveNovel(e) {
+        let novelList = [];
+
+        // Tải dữ liệu từ Google Sheet về Web
+        async function fetchNovels() {
+            try {
+                const res = await fetch(GOOGLE_SCRIPT_URL);
+                novelList = await res.json();
+                renderTable();
+            } catch (err) {
+                console.error("Lỗi tải dữ liệu:", err);
+            }
+        }
+
+        // Lưu truyện mới lên Google Sheet
+        async function saveNovel(e) {
             e.preventDefault();
-            const newNovel = {
-                id: Date.now(),
+            const btn = document.getElementById('btnSave');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang lưu...';
+
+            const payload = {
                 title: document.getElementById('title').value.trim(),
                 author: document.getElementById('author').value.trim(),
                 genre: document.getElementById('genre').value.trim(),
@@ -364,19 +208,22 @@
                 linkDriveTxt: document.getElementById('linkDriveTxt').value.trim()
             };
 
-            novelList.unshift(newNovel);
-            localStorage.setItem('my_novels_db', JSON.stringify(novelList));
-            document.getElementById('novelForm').reset();
-            renderTable();
-            showToast("Đã lưu truyện thành công!");
-        }
+            try {
+                await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
 
-        function deleteNovel(id) {
-            if(confirm("Bạn có chắc chắn muốn xóa truyện này?")) {
-                novelList = novelList.filter(item => item.id !== id);
-                localStorage.setItem('my_novels_db', JSON.stringify(novelList));
-                renderTable();
-                showToast("Đã xóa truyện!");
+                document.getElementById('novelForm').reset();
+                showToast("Đã gửi dữ liệu về Google Sheet thành công!");
+                setTimeout(fetchNovels, 1500); // Tải lại bảng sau 1.5s
+            } catch (err) {
+                alert("Lỗi khi lưu: " + err.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Lưu Về Google Sheet';
             }
         }
 
@@ -386,40 +233,37 @@
             tbody.innerHTML = '';
 
             const filtered = novelList.filter(n => 
-                n.title.toLowerCase().includes(query) || 
-                n.author.toLowerCase().includes(query)
+                (n["Tên truyện"] && String(n["Tên truyện"]).toLowerCase().includes(query)) || 
+                (n["Tác giả"] && String(n["Tác giả"]).toLowerCase().includes(query))
             );
 
             document.getElementById('count').innerText = filtered.length;
 
             if(filtered.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="12" style="text-align:center; color: var(--text-secondary); padding: 20px;">Chưa có dữ liệu truyện nào</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="11" style="text-align:center; color: var(--text-secondary); padding: 20px;">Đang tải hoặc chưa có dữ liệu...</td></tr>`;
                 return;
             }
 
             filtered.forEach(n => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    <td><b>${n.title}</b></td>
-                    <td>${n.author || '-'}</td>
-                    <td>${n.genre || '-'}</td>
-                    <td>${n.chapters || '-'}</td>
-                    <td title="${n.summary}">${n.summary || '-'}</td>
-                    <td>${n.linkWiki ? `<a href="${n.linkWiki}" target="_blank">Link Wiki</a>` : '-'}</td>
-                    <td>${n.linkRaw ? `<a href="${n.linkRaw}" target="_blank">Link Raw</a>` : '-'}</td>
-                    <td>${n.linkDammy ? `<a href="${n.linkDammy}" target="_blank">Link Dammy</a>` : '-'}</td>
-                    <td>${n.linkMotruyen ? `<a href="${n.linkMotruyen}" target="_blank">Link Motruyen</a>` : '-'}</td>
-                    <td>${n.linkDriveImg ? `<a href="${n.linkDriveImg}" target="_blank">Ảnh Drive</a>` : '-'}</td>
-                    <td>${n.linkDriveTxt ? `<a href="${n.linkDriveTxt}" target="_blank">Txt Drive</a>` : '-'}</td>
-                    <td>
-                        <button class="btn-icon" onclick="deleteNovel(${n.id})" title="Xóa"><i class="fa-solid fa-trash" style="color: #e53e3e;"></i></button>
-                    </td>
+                    <td><b>${n["Tên truyện"] || ''}</b></td>
+                    <td>${n["Tác giả"] || '-'}</td>
+                    <td>${n["Thể loại"] || '-'}</td>
+                    <td>${n["Số chương"] || '-'}</td>
+                    <td title="${n["Giới thiệu"] || ''}">${n["Giới thiệu"] || '-'}</td>
+                    <td>${n["Link wiki"] ? `<a href="${n["Link wiki"]}" target="_blank">Link Wiki</a>` : '-'}</td>
+                    <td>${n["Link raw"] ? `<a href="${n["Link raw"]}" target="_blank">Link Raw</a>` : '-'}</td>
+                    <td>${n["Link dammy"] ? `<a href="${n["Link dammy"]}" target="_blank">Link Dammy</a>` : '-'}</td>
+                    <td>${n["Link motruyen"] ? `<a href="${n["Link motruyen"]}" target="_blank">Link Motruyen</a>` : '-'}</td>
+                    <td>${n["Link ảnh gg drive"] ? `<a href="${n["Link ảnh gg drive"]}" target="_blank">Ảnh Drive</a>` : '-'}</td>
+                    <td>${n["Link txt gg drive"] ? `<a href="${n["Link txt gg drive"]}" target="_blank">Txt Drive</a>` : '-'}</td>
                 `;
                 tbody.appendChild(tr);
             });
         }
 
-        // TẠO VÀ COPY MÃ HTML THEO ĐÚNG THỨ TỰ YÊU CẦU
+        // COPY MÃ HTML TABLE CHUẨN THỨ TỰ
         function copyHTMLTable() {
             if(novelList.length === 0) {
                 alert("Chưa có dữ liệu truyện để copy!");
@@ -433,17 +277,17 @@
 
             novelList.forEach(n => {
                 html += `    <tr>\n`;
-                html += `      <td>${n.title}</td>\n`;
-                html += `      <td>${n.author}</td>\n`;
-                html += `      <td>${n.genre}</td>\n`;
-                html += `      <td>${n.chapters}</td>\n`;
-                html += `      <td>${n.summary}</td>\n`;
-                html += `      <td>${n.linkWiki ? `<a href="${n.linkWiki}">Link Wiki</a>` : ''}</td>\n`;
-                html += `      <td>${n.linkRaw ? `<a href="${n.linkRaw}">Link Raw</a>` : ''}</td>\n`;
-                html += `      <td>${n.linkDammy ? `<a href="${n.linkDammy}">Link Dammy</a>` : ''}</td>\n`;
-                html += `      <td>${n.linkMotruyen ? `<a href="${n.linkMotruyen}">Link Motruyen</a>` : ''}</td>\n`;
-                html += `      <td>${n.linkDriveImg ? `<a href="${n.linkDriveImg}">Link ảnh gg drive</a>` : ''}</td>\n`;
-                html += `      <td>${n.linkDriveTxt ? `<a href="${n.linkDriveTxt}">Link txt gg drive</a>` : ''}</td>\n`;
+                html += `      <td>${n["Tên truyện"] || ''}</td>\n`;
+                html += `      <td>${n["Tác giả"] || ''}</td>\n`;
+                html += `      <td>${n["Thể loại"] || ''}</td>\n`;
+                html += `      <td>${n["Số chương"] || ''}</td>\n`;
+                html += `      <td>${n["Giới thiệu"] || ''}</td>\n`;
+                html += `      <td>${n["Link wiki"] ? `<a href="${n["Link wiki"]}">Link Wiki</a>` : ''}</td>\n`;
+                html += `      <td>${n["Link raw"] ? `<a href="${n["Link raw"]}">Link Raw</a>` : ''}</td>\n`;
+                html += `      <td>${n["Link dammy"] ? `<a href="${n["Link dammy"]}">Link Dammy</a>` : ''}</td>\n`;
+                html += `      <td>${n["Link motruyen"] ? `<a href="${n["Link motruyen"]}">Link Motruyen</a>` : ''}</td>\n`;
+                html += `      <td>${n["Link ảnh gg drive"] ? `<a href="${n["Link ảnh gg drive"]}">Link ảnh gg drive</a>` : ''}</td>\n`;
+                html += `      <td>${n["Link txt gg drive"] ? `<a href="${n["Link txt gg drive"]}">Link txt gg drive</a>` : ''}</td>\n`;
                 html += `    </tr>\n`;
             });
 
@@ -468,8 +312,8 @@
             setTimeout(() => { toast.style.display = 'none'; }, 2500);
         }
 
-        // Khởi tạo
-        renderTable();
+        // Tải dữ liệu lần đầu
+        fetchNovels();
     </script>
 </body>
 </html>
